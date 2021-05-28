@@ -7,7 +7,7 @@ Sentinel 1 is a part of the European Space Agency’s satellite suite. Launched 
 ## Tutorial Summary 
 In this tutorial, we will be downloading Sentinel -1 C – Band radar imagery hosted in AWS for public use by Indigo Ag. We will then calculate the change in median backscatter value for a cornfield before and after harvest to see if our hypothesis holds. Hypothesis: *If there is a significant change in backscatter values of a crop surface, this should indicate the harvesting of the crop. Finally, we’ll walk through how to load our resulting excel files into Tableau for clean graphic display.
 
-##Software Needed 
+## Software Needed 
 The software needed for this tutorial is: 
 •	A copy of R Statistical Analysis Software (I use the free R Studio)
 •	ArcGIS Pro or QGIS (Optional for viewing your scene imagery) 
