@@ -26,7 +26,7 @@ The software needed for this tutorial is:
 •	A copy of R Statistical Analysis Software (I use the free [R Studio](https://www.rstudio.com/products/rstudio/)). 
 •	ArcGIS Pro or QGIS (Optional for viewing your scene imagery).    
 •	Tableau.    
-To download R Studio, visit (https://www.rstudio.com/products/rstudio/), download the .zip file, and follow through with the R Studio set up wizard. If you would like further explanation or help setting up R, check out this Github blog post by Software Carpentry (https://jennybc.github.io/2014-05-12-ubc/r-setup.html). 
+To download R Studio, visit (https://www.rstudio.com/products/rstudio/), download the .zip file, and follow through with the R Studio set up wizard. If you would like further explanation or help setting up R, check out this Github blog post by [Software Carpentry](https://jennybc.github.io/2014-05-12-ubc/r-setup.html). 
 
 For a free on-year student license to Tableau, follow this link (https://www.tableau.com/academic/students). If you’re not a student – don’t worry about getting Tableau. Excel makes good graphs on the cheap! I wanted to include Tableau here to help those with access but not the know-how. 
 
