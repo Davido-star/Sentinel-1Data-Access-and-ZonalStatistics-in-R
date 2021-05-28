@@ -2,7 +2,25 @@
 This repository contains the README explanation of accessing Sentinial-1 Radar imagery for free using Amazon Web Services (AWS), running spatial statistics on the imagery using R, and a quick start guide for using Tableau to display your data. The README will walk a user through data download, data preparation, zonal statistics using R, and loading excel files into Tableau for graphic display. A Command Line Interface (CLI) script for browsing AWS buckets, two examples .tiff files, R script, and a study area .shp file are contained in this tutorial repository. 
 
 ## What is Sentinel- 1 imagery, and why is it important? 
- ] (https://www.esa.int/Enabling_Support/Operations/Sentinel-1_operations).![image](https://user-images.githubusercontent.com/73979215/120032158-c5088880-bfc7-11eb-95c8-5ff1297c26ca.png)
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Sentinel 1 is a part of the European Space Agency’s satellite suite. Launched in 2014, Sentinel 1 was the first mission of the European Union’s Copernicus Programme and activated the public use of moderate resolution radar imagery. Onboard is a C- band duel Polarized Synthetic Aperture Radar that provides ground images in all light and weather conditions. Sentinel -1 C-band radar imagery is an active remote sensing platform that measures the amount of backscatter from a surface in decibels (dB). Backscatter is a measure of how smooth texture a surface is; the higher the value in backscatter, the more edges and reflection points a surface has, i.e., rough in texture, while the lower the value in backscatter, the smoother a surface. C-band imagery has particular application in the agricultural industry, and recent interest has explored the use of radar to detect crop harvesting. The idea is that a field of, say, corn or soy will have a more significant amount of backscatter before being harvested than after harvest (Kavats et al., 2019). This tutorial will walk you through this concept, from data downloading to conducting analysis. 
 
