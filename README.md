@@ -11,30 +11,30 @@ Backscatter is a measure of how smooth texture a surface is; the higher the valu
 ## Tutorial Summary 
 In this tutorial, we will be downloading Sentinel -1 C – Band radar imagery hosted in AWS for public use by [Indigo Ag](indigoag.com). We will then calculate the change in median backscatter value for a cornfield before and after harvest to see if our hypothesis holds. Hypothesis: *If there is a significant change in backscatter values of a crop surface, this should indicate the harvesting of the crop.* Finally, we’ll walk through how to load our resulting excel files into Tableau for clean graphic display.
 
-## Software Needed 
-The software needed for this tutorial is:  
-•	A copy of R Statistical Analysis Software (I use the free R Studio).  
-•	ArcGIS Pro or QGIS (Optional for viewing your scene imagery).   
-•	Tableau.  
+## Software Needed   
+The software needed for this tutorial is:    
+•	A copy of R Statistical Analysis Software (I use the free R Studio).   
+•	ArcGIS Pro or QGIS (Optional for viewing your scene imagery).    
+•	Tableau.    
 
 To download R Studio, visit (https://www.rstudio.com/products/rstudio/), download the .zip file, and follow through with the R Studio set up wizard. If you would like further explanation or help setting up R, check out this Github blog post by Software Carpentry (https://jennybc.github.io/2014-05-12-ubc/r-setup.html). 
 
 For a free on-year student license to Tableau, follow this link (https://www.tableau.com/academic/students). If you’re not a student – don’t worry about getting Tableau. Excel makes good graphs on the cheap! I wanted to include Tableau here to help those with access but not the know-how. 
 
 ##Software Needed 
-The software needed for this tutorial is: 
-•	A copy of R Statistical Analysis Software (I use the free [R Studio](https://www.rstudio.com/products/rstudio/))
-•	ArcGIS Pro or QGIS (Optional for viewing your scene imagery) 
-•	Tableau 
+The software needed for this tutorial is:  
+•	A copy of R Statistical Analysis Software (I use the free [R Studio](https://www.rstudio.com/products/rstudio/)). 
+•	ArcGIS Pro or QGIS (Optional for viewing your scene imagery).    
+•	Tableau.    
 To download R Studio, visit (https://www.rstudio.com/products/rstudio/), download the .zip file, and follow through with the R Studio set up wizard. If you would like further explanation or help setting up R, check out this Github blog post by Software Carpentry (https://jennybc.github.io/2014-05-12-ubc/r-setup.html). 
 
 For a free on-year student license to Tableau, follow this link (https://www.tableau.com/academic/students). If you’re not a student – don’t worry about getting Tableau. Excel makes good graphs on the cheap! I wanted to include Tableau here to help those with access but not the know-how. 
 
 ## Data 
-In this tutorial, we will use three sets of example data:
-1.	Two .tiffs of C-Band radar imagery.   
-2.	A study area .shp file.  
-3.	An excel spreadsheet. 
+In this tutorial, we will use three sets of example data:  
+1.	Two .tiffs of C-Band radar imagery.     
+2.	A study area .shp file.    
+3.	An excel spreadsheet.   
 
 #### Geo tiffs 
 Our imagery is accessed through AWS CLI cloud shell; you’ll need a free [AWS](https://aws.amazon.com/free/?trk=ps_a131L0000085DvcQAE&trkCampaign=acq_paid_search_brand&sc_channel=ps&sc_campaign=acquisition_US&sc_publisher=google&sc_category=core&sc_country=US&sc_geo=NAMER&sc_outcome=acq&sc_detail=aws%20account&sc_content=Account_e&sc_segment=432339156165&sc_medium=ACQ-P|PS-GO|Brand|Desktop|SU|AWS|Core|US|EN|Text&s_kwcid=AL!4422!3!432339156165!e!!g!!aws%20account&ef_id=CjwKCAjwqcKFBhAhEiwAfEr7zUchttWpTWHrMuxNXpe0JNMcbMdZKzzcnUIpel-q4XtLkmGSBfRjEhoC5WEQAvD_BwE:G:s&s_kwcid=AL!4422!3!432339156165!e!!g!!aws%20account&all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all) account to access the cloud and imagery buckets. 
