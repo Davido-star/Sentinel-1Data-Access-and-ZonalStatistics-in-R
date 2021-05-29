@@ -64,6 +64,17 @@ When both images are download to your local drive, place them both into the fold
 Now we're ready for statistical analysis.
 
 #### Zonal Statistics in R 
+Open the R script provided in this tutorial and take a look around; it's short and sweet! Huge shout out to Su Ye at the University of Connecticut for helping me get this script up and running. I’ve since made adjustments to fit my needs by Su Ye got me going. Let’s take a look. 
+
+We need to begin by importing a few different libraries; you’ll see them listed at the top of the script. The first library is `sf` or [simple features]( https://r-spatial.github.io/sf/) that will help us place our study area in the correct location for analysis. Then, we’ll add the `dplyr` [library]( https://www.rdocumentation.org/packages/dplyr/versions/0.7.8) , which lets us use a few verb conventions, later on, to add a new field to the resulting shapefile. Last on the library list is `raster`, this the most important library because it enables us to run statistics on our raster .tiff images, unfortunately though there isn’t much documentation on this [library]( https://www.rdocumentation.org/packages/raster/versions/3.4-10). In case you’re following along, copy this code block to install these packages. 
+```
+library(sf)
+library(dplyr)
+library(raster)
+```
+
+
+
 
 
 
