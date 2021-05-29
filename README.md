@@ -66,12 +66,74 @@ Now we're ready for statistical analysis.
 #### Zonal Statistics in R 
 Open the R script provided in this tutorial and take a look around; it's short and sweet! Huge shout out to Su Ye at the University of Connecticut for helping me get this script up and running. I’ve since made adjustments to fit my needs by Su Ye got me going. Let’s take a look. 
 
-We need to begin by importing a few different libraries; you’ll see them listed at the top of the script. The first library is `sf` or [simple features]( https://r-spatial.github.io/sf/) that will help us place our study area in the correct location for analysis. Then, we’ll add the `dplyr` [library]( https://www.rdocumentation.org/packages/dplyr/versions/0.7.8) , which lets us use a few verb conventions, later on, to add a new field to the resulting shapefile. Last on the library list is `raster`, this the most important library because it enables us to run statistics on our raster .tiff images, unfortunately though there isn’t much documentation on this [library]( https://www.rdocumentation.org/packages/raster/versions/3.4-10). In case you’re following along, copy this code block to install these packages. 
+1. We need to begin by importing a few different libraries; you’ll see them listed at the top of the script. The first library is `sf` or [simple features]( https://r-spatial.github.io/sf/) that will help us place our study area in the correct location for analysis. Then, we’ll add the `dplyr` [library]( https://www.rdocumentation.org/packages/dplyr/versions/0.7.8) , which lets us use a few verb conventions, later on, to add a new field to the resulting shapefile. Last on the library list is `raster`. Raster is the most important library because it enables us to run statistics on our raster .tiff images. Unfortunately, there isn’t much documentation on this [library]( https://www.rdocumentation.org/packages/raster/versions/3.4-10). In case you’re following along, copy this code block to install these packages. 
 ```
 library(sf)
 library(dplyr)
 library(raster)
 ```
+2. Now, we will establish our directories that house our files. The early directory should link the folder path to the sentinel image taken before harvesting. In our case, this will be the image `20201014_13SCU.tif`. The later directory should link the folder path to the sentinel image taken after harvest. In our case, this will be the image `20201019_13SCU.tif`. The polygon directory links the script to the shapefile we want to run statistics within, and the out directory identifies a new name for the resulting shapefile. The cornfield is on Isleta Street in Albuquerque, NM, so I’ve named the shapefile `Isleta_UTM13` to represent the location and projection of the shapefile contents. Your file paths will be different from mine, but I'll include abundance to see what an outline of yours should look like. #### Notice the \\#### .In your file paths, either add a backslash to the path you provide or change the backslash to a single forward slash. I prefer the double backslash.  
+```
+# change the below four lines to point to your local directory
+early.dir <- 'F:\\spring 21\\programming\\Finialproject\\20201014_13SCU.tif'
+late.dir <- 'F:\\spring 21\\programming\\Finialproject\\20201019_13SCU.tif'
+poly.dir <- 'F:\\spring 21\\programming\\Finialproject\\Isleta_UTM13.shp'
+out.dir <- 'F:\\spring 21\\programming\\Finialproject\\Isleta_1014_1019_new.shp'
+```
+3. Next, we’ll define our variables.
+```
+early.s1.raster <- raster(early.dir)
+late.s1.raster <- raster(late.dir)
+polys <- st_read(poly.dir)
+```
+4. Run the statistics: I’ve chosen to extract the median backscatter value instead of the mean or a different descriptive statistic. Outliers have less influence on medians, and for that reason, the median is more valuable for me to know and compare. 
+```
+early.vals <- extract(early.s1.raster, st_transform(polys,crs(early.s1.raster)), 
+                      fun=median, na.rm=TRUE)
+late.vals <- extract(late.s1.raster, st_transform(polys,crs(late.s1.raster)), 
+                     fun=median, na.rm=TRUE)
+```
+Running the above lines of code will result in an error. 
+
+When making feature classes in ArcPro, like the provided polygon, a vertical attribute is automatically generated and linked to the shapefile. The raster package we are using to extract zonal statistics in R only works on XY plane features. We need to coerce the shapefile into the XY plane by adding `st_zm` to our `polys` variable 
+```
+early.vals <- extract(early.s1.raster, st_transform(st_zm(polys),crs(early.s1.raster)), 
+                      fun=median, na.rm=TRUE)
+late.vals <- extract(late.s1.raster, st_transform(st_zm(polys),crs(late.s1.raster)), 
+                     fun=median, na.rm=TRUE)
+```
+5.  Finally, we’ll write our results into new fields within a new shapefile. 
+```
+new.polys <- st_zm(polys) %>% mutate(bfr_hr = early.vals) %>% 
+  mutate(aft_hr = late.vals) %>% mutate(diffMed = early.vals - late.vals)
+st_write(new.polys, out.dir, delete_dsn = TRUE)
+```
+Here’s the full code block in case you need a clean start. 
+```
+library(sf)
+library(dplyr)
+library(raster)
+
+# change the below four lines to point to your local file directory
+early.dir <- 'F:\\spring 21\\programming\\Finialproject\\20201014_13SCU.tif'
+late.dir <- 'F:\\spring 21\\programming\\Finialproject\\20201019_13SCU.tif'
+poly.dir <- 'F:\\spring 21\\programming\\Finialproject\\Isleta_UTM13.shp'
+out.dir <- 'F:\\spring 21\\programming\\Finialproject\\Isleta_1014_1019_new.shp'
+
+
+early.s1.raster <- raster(early.dir)
+late.s1.raster <- raster(late.dir)
+polys <- st_read(poly.dir)
+early.vals <- extract(early.s1.raster, st_transform(st_zm(polys),crs(early.s1.raster)), 
+                      fun=median, na.rm=TRUE)
+late.vals <- extract(late.s1.raster, st_transform(st_zm(polys),crs(late.s1.raster)), 
+                     fun=median, na.rm=TRUE)
+
+new.polys <- st_zm(polys) %>% mutate(bfr_hr = early.vals) %>% 
+  mutate(aft_hr = late.vals) %>% mutate(diffMed = early.vals - late.vals)
+st_write(new.polys, out.dir, delete_dsn = TRUE)
+```
+
 
 
 
