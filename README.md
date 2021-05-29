@@ -108,7 +108,7 @@ new.polys <- st_zm(polys) %>% mutate(bfr_hr = early.vals) %>%
   mutate(aft_hr = late.vals) %>% mutate(diffMed = early.vals - late.vals)
 st_write(new.polys, out.dir, delete_dsn = TRUE)
 ```
-Here’s the full code block in case you need a clean start. 
+Here’s the entire code block in case you need a clean start. 
 ```
 library(sf)
 library(dplyr)
@@ -133,10 +133,7 @@ new.polys <- st_zm(polys) %>% mutate(bfr_hr = early.vals) %>%
   mutate(aft_hr = late.vals) %>% mutate(diffMed = early.vals - late.vals)
 st_write(new.polys, out.dir, delete_dsn = TRUE)
 ```
-
-
-
-
+6. Check the folder you linked for the output and make sure you see a new shapefile. After running the last line of code, a GDAL error will pop up saying the new shapefile doesn’t appear to be a file or directory. The error isn’t a problem, and R will write the new file. What it’s telling you is there wasn’t a file with the same name to delete-  `delete_dsn` tells R to overwrite a file of the same output name; if you didn’t have one, it throws an error. 
 
 
 
