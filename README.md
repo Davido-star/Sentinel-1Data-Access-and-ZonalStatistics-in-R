@@ -95,7 +95,8 @@ late.vals <- extract(late.s1.raster, st_transform(polys,crs(late.s1.raster)),
 ```
 Running the above lines of code will result in an error. 
 
-When making feature classes in ArcPro, like the provided polygon, a vertical attribute is automatically generated and linked to the shapefile. The raster package we are using to extract zonal statistics in R only works on XY plane features. We need to coerce the shapefile into the XY plane by adding `st_zm` to our `polys` variable 
+When making feature classes in ArcPro, like the provided polygon, a vertical attribute is automatically generated and linked to the shapefile. The raster package we are using to extract zonal statistics in R only works on XY plane features. We need to coerce the shapefile into the XY plane by adding `st_zm` to our `polys` variable. Information on how I found this out is [here]( https://gis.stackexchange.com/questions/346855/remove-z-value-from-xyz-point-in-sf) on GIS Stack Exchange. 
+
 ```
 early.vals <- extract(early.s1.raster, st_transform(st_zm(polys),crs(early.s1.raster)), 
                       fun=median, na.rm=TRUE)
