@@ -120,7 +120,7 @@ late.dir <- 'F:\\spring 21\\programming\\Finialproject\\20201019_13SCU.tif'
 poly.dir <- 'F:\\spring 21\\programming\\Finialproject\\Isleta_UTM13.shp'
 out.dir <- 'F:\\spring 21\\programming\\Finialproject\\Isleta_1014_1019_new.shp'
 
-
+#define variables 
 early.s1.raster <- raster(early.dir)
 late.s1.raster <- raster(late.dir)
 polys <- st_read(poly.dir)
@@ -129,6 +129,7 @@ early.vals <- extract(early.s1.raster, st_transform(st_zm(polys),crs(early.s1.ra
 late.vals <- extract(late.s1.raster, st_transform(st_zm(polys),crs(late.s1.raster)), 
                      fun=median, na.rm=TRUE)
 
+#write new shapefile
 new.polys <- st_zm(polys) %>% mutate(bfr_hr = early.vals) %>% 
   mutate(aft_hr = late.vals) %>% mutate(diffMed = early.vals - late.vals)
 st_write(new.polys, out.dir, delete_dsn = TRUE)
