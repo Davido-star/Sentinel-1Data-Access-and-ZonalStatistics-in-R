@@ -43,6 +43,7 @@ The first thing is first, let's set up our data folder. Start by downloading the
 •	A shapefile and associated metafiles.   
 •	A .txt file.   
 Your data environment should look something like this. 
+
 <img width="593" alt="Screen Shot 2021-05-29 at 4 30 39 PM" src="https://user-images.githubusercontent.com/73979215/120084063-3cf3b300-c09b-11eb-8c1d-1577053d304a.png">.    
 
 If you decide you want to try and download the Sentinel imagery yourself, read on, or skip this next section and go right to the calculating zonal statistics in R using the data provided. 
