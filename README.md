@@ -138,7 +138,8 @@ st_write(new.polys, out.dir, delete_dsn = TRUE)
 
 ## Migrate to ArcPro or QGIS to view statistics 
 If you don’t have access to ArcPro or QGIS, I will include screenshots of the viewing results. 
-1.  Open ArcPro or QGIS and start a new project. Define the home folder as our data folder we’ve worked from and open the ` Isleta_1014_1019_new.shp` shapefiles attribute table. It will look something like this.   
+1.  Open ArcPro or QGIS and start a new project. Define the home folder as our data folder we’ve worked from and open the ` Isleta_1014_1019_new.shp` shapefiles attribute table. It will look something like this. 
+  
  <img width="508" alt="Screen Shot 2021-05-29 at 6 33 58 PM" src="https://user-images.githubusercontent.com/73979215/120086629-6f5adb80-c0ae-11eb-807b-e0bb658066ab.png">.  
 
 The attribute field bfr_hr is the median backscatter value of the study area from before the harvest date, aft_hr is the median backscatter value from after the harvest date, and diffMed is the difference between bfr_hr and aft_hr. The value of diffMed is exciting! The positive value shows us there was a measurable decline in backscatter from before harvest to after harvest. The raw backscatter images look like this. Note: white pixels indicate higher backscatter than black ones.  
