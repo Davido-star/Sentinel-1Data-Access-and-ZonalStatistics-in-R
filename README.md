@@ -136,6 +136,25 @@ st_write(new.polys, out.dir, delete_dsn = TRUE)
 ```
 6. Check the folder you linked for the output and make sure you see a new shapefile. After running the last line of code, a GDAL error will pop up saying the new shapefile doesn’t appear to be a file or directory. The error isn’t a problem, and R will write the new file. What it’s telling you is there wasn’t a file with the same name to delete-  `delete_dsn` tells R to overwrite a file of the same output name; if you didn’t have one, it throws an error. 
 
+## Migrate to ArcPro or QGIS to view statistics 
+If you don’t have access to ArcPro or QGIS, I will include screenshots of the viewing results. 
+1.  Open ArcPro or QGIS and start a new project. Define the home folder as our data folder we’ve worked from and open the ` Isleta_1014_1019_new.shp` shapefiles attribute table. It will look something like this.   
+ <img width="508" alt="Screen Shot 2021-05-29 at 6 33 58 PM" src="https://user-images.githubusercontent.com/73979215/120086629-6f5adb80-c0ae-11eb-807b-e0bb658066ab.png">.  
+
+The attribute field bfr_hr is the median backscatter value of the study area from before the harvest date, aft_hr is the median backscatter value from after the harvest date, and diffMed is the difference between bfr_hr and aft_hr. The value of diffMed is exciting! The positive value shows us there was a measurable decline in backscatter from before harvest to after harvest. The raw backscatter images look like this. Note: white pixels indicate higher backscatter than black ones.  
+
+#### Before Harvest 10/14/2020
+ <img width="813" alt="Screen Shot 2021-05-29 at 6 40 44 PM" src="https://user-images.githubusercontent.com/73979215/120086634-7d106100-c0ae-11eb-9b8f-d018d2acb9ca.png">.  
+
+
+#### After Harvest 10/19/2020
+ <img width="815" alt="Screen Shot 2021-05-29 at 6 41 20 PM" src="https://user-images.githubusercontent.com/73979215/120086660-b34de080-c0ae-11eb-8506-515348fc3017.png">.  
+
+
+Sometime between October 14th, 2020, and October 19th, 2020, farmers at Isleta harvested the cornfield. Since this is a control example to train a neural network to identify crop harvest, we know farmers at Isleta harvested the cornfield on October 16th, 2020. It appears our hypothesis is sound!
+
+
+
 
 
 
