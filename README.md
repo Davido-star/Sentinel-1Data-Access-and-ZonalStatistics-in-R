@@ -151,7 +151,7 @@ The attribute field bfr_hr is the median backscatter value of the study area fro
 #### After Harvest 10/19/2020
  <img width="815" alt="Screen Shot 2021-05-29 at 6 41 20 PM" src="https://user-images.githubusercontent.com/73979215/120086660-b34de080-c0ae-11eb-8506-515348fc3017.png">.  
 
-Here’s an image of the filed itself. 
+Here’s an image of the field itself. 
 
 <img width="811" alt="Screen Shot 2021-05-29 at 6 53 02 PM" src="https://user-images.githubusercontent.com/73979215/120086692-2e16fb80-c0af-11eb-8f6a-3887bf0aedad.png">.  
 
