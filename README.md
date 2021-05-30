@@ -24,7 +24,8 @@ For a free on-year student license to Tableau, follow this link (https://www.tab
 In this tutorial, we will use three sets of example data:  
 1.	Two .tiffs of C-Band radar imagery.     
 2.	A study area .shp file.    
-3.	An excel spreadsheet.   
+3.	An excel spreadsheet of VV polarization and VH polarization median values (explained later on). 
+   
 
 #### Geo tiffs 
 Our imagery is accessed through AWS CLI cloud shell; you’ll need a free [AWS](https://aws.amazon.com/free/?trk=ps_a131L0000085DvcQAE&trkCampaign=acq_paid_search_brand&sc_channel=ps&sc_campaign=acquisition_US&sc_publisher=google&sc_category=core&sc_country=US&sc_geo=NAMER&sc_outcome=acq&sc_detail=aws%20account&sc_content=Account_e&sc_segment=432339156165&sc_medium=ACQ-P|PS-GO|Brand|Desktop|SU|AWS|Core|US|EN|Text&s_kwcid=AL!4422!3!432339156165!e!!g!!aws%20account&ef_id=CjwKCAjwqcKFBhAhEiwAfEr7zUchttWpTWHrMuxNXpe0JNMcbMdZKzzcnUIpel-q4XtLkmGSBfRjEhoC5WEQAvD_BwE:G:s&s_kwcid=AL!4422!3!432339156165!e!!g!!aws%20account&all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=*all&awsf.Free%20Tier%20Categories=*all) account to access the cloud and imagery buckets. Provided [here]( https://sentinel-s1-rtc-indigo-docs.s3-us-west-2.amazonaws.com/index.html) is documentation on imagery access. I have also included a .txt file with the needed command line inputs to access the imagery used in this tutorial.  
@@ -158,6 +159,61 @@ Here’s an image of the field itself.
 
 
 Sometime between October 14th, 2020, and October 19th, 2020, farmers at Isleta harvested the cornfield. Since this is a control example to train a neural network to identify crop harvest, we know farmers at Isleta harvested the cornfield on October 16th, 2020. It appears our hypothesis is sound!
+
+## Viewing data from excel using Tableau 
+To train a neural network, we would need hundreds of training sites like this from multiple years. We should be sure our methods are sound before getting into the nitty-gritty of calculating median values for many fields. Let’s use Tableau to check the recommendation of Khabbazan et al. 2019 in using VV polarization instead of VH polarization using pretty graphics.
+This tutorial includes a folder called VV_VH_compare, which contains an excel file of median backscatter values in both VV and VH polarization. We want to use the polarization that shows the most discernability from before and after harvest so we don’t waste our time! The median values calculated should show us the field was harvested between the image dates of 10/23/2018 and 10/30/2018. Let us check it out! 
+
+1. Open Tableau and go to file <- new. Save the new workbook into the data folder with the VV_VH_compare excel workbook.
+ 
+2. Click “New data source” in the top ribbon, and under “To File” select Microsoft Excel.    
+
+ <img width="322" alt="Screen Shot 2021-05-29 at 7 29 00 PM" src="https://user-images.githubusercontent.com/73979215/120087420-c0220280-c0b5-11eb-8d16-9820e59508d4.png">.  
+
+
+3. Navigate to where you’ve saved the provided .xls workbook titled “VV_VH_compare” and click OK. 
+
+Your Tableau window will look like this. 
+
+<img width="1076" alt="Screen Shot 2021-05-29 at 7 34 38 PM" src="https://user-images.githubusercontent.com/73979215/120087427-cca65b00-c0b5-11eb-888d-3ac0efbb8c8f.png">.  
+ 
+
+4. Drag VHstats and VVstats to the area that says “Drag tables here” and, when prompted, select the date fields as the connecting attribute between the two tables. The result will look like this. 
+
+ <img width="1074" alt="Screen Shot 2021-05-29 at 7 36 51 PM" src="https://user-images.githubusercontent.com/73979215/120087429-d4fe9600-c0b5-11eb-959f-baf703f97a7a.png">.  
+
+5.  At the bottom of the Tableau window, click on sheet1. 
+6. On the left-hand side, you should see both of your sheets, VHstats, and VVstats, stacked on top of each other. 
+7.  Drag Change Type for VHstats into the columns area and Change in Median for VHstats into the rows area. Our Graphic is coming together! 
+8. Now, do the same for VVstats. Drag the Change Type for VVstats into the columns area and place it to the right of the VHstats. Then, drag the Change in Median for VVstats into the rows area and put it to the right of VHstats. Your frame will now look like this. 
+
+<img width="1078" alt="Screen Shot 2021-05-29 at 7 52 21 PM" src="https://user-images.githubusercontent.com/73979215/120087838-94a11700-c0b9-11eb-8686-8c212cbae6a2.png">. 
+
+9. Without doing anything else, we can see that the VV polarization is more sensitive to changes in the backscatter. This field was harvested on 10/17/2018, but you wouldn’t know that from looking at the VHstats. We can conclude the recommendation by Khabbazan et al., 2019 is correct and only collect the VV polarization images for crop monitoring from here on out. 
+
+## Conclusion 
+In this tutorial, we have learned how to download images using the AWS command-line interface. CLI took me some time to get used to, so don’t worry if it doesn’t come second nature off the cusp. Hopefully, this tutorial will help you out! Then we explored a new concept in remote sensing that uses radar imagery to detect changes in backscatter for application in the agricultural industry. Our initial working hypothesis was *If there is a significant change in backscatter values of a crop surface, this should indicate the harvesting of the crop.* From this preliminary analysis in R, it looks like this hypothesis could be a fact – that’s exciting going forward. Then we made sure our methods for approaching this hypothesis were sound by checking the discriminability of different data sources. We can see VV polarization is more sensitive to changes in backscatter when looking at crop surfaces so that we won’t waste our time with VH polarization for this application. A stakeholder would like to know they’ll be getting the best product, and you can show them a great graphic from Tableau. 
+Happy Coding :) 
+
+## Citations 
+Kavats, O., Khramov, D., Sergieieva, K., & Vasyliev, V. (2019). Monitoring Harvesting by Time Series of Sentinel-1 SAR Data. Remote Sensing, 11(21), 2496. https://doi.org/10.3390/rs11212496
+
+Khabbazan, S., Vermunt, P., Steele-Dunne, S., Ratering Arntz, L., Marinetti, C., van der Valk, D., Iannini, L., Molijn, R., Westerdijk, K., & van der Sande, C. (2019). Crop Monitoring Using Sentinel-1 Data: A Case Study from The Netherlands. Remote Sensing, 11(16), 1887. https://doi.org/10.3390/rs11161887
+
+McNairn, H., & Brisco, B. (2004). The application of C-band polarimetric SAR for agriculture: A review. Canadian Journal of Remote Sensing, 30(3), 525–542. https://doi.org/10.5589/m03-069
+
+Moran, M. S., Hymer, D. C., Qi, J., & Kerr, Y. (n.d.). Comparison of ERS-2 SAR and Landsat TM imagery for monitoring agricultural crop and soil conditions, Remote Sens. Environ, 2002.
+
+Veloso, A., Mermoz, S., Bouvet, A., Le Toan, T., Planells, M., Dejoux, J.-F., & Ceschia, E. (2017).Understanding the temporal behavior of crops using Sentinel-1 and Sentinel-2-like data for agricultural applications. Remote Sensing of Environment, 199, 415–426. https://doi.org/10.1016/j.rse.2017.07.015
+
+
+
+
+
+
+
+
+
 
 
 
