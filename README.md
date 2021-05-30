@@ -1,6 +1,6 @@
 ### Detecting Crop Harvest Using Sentinel Imagery | Zonal Statistics in R | David Smith | IDCE30274 Finial Project | 26 May 2021. 
 
-This repository contains the README explanation of accessing Sentinial-1 Radar imagery for free using Amazon Web Services (AWS), calculating zonal using R, and a quick start guide for using Tableau to display excel data. The README will walk a user through data download, data preparation, zonal statistics using R, and loading excel files into Tableau for graphic display. A Command Line Interface (CLI) script for browsing AWS buckets, two examples .tiff files, R script, study area .shp file, and excel workbook are contained in this tutorial repository. 
+This repository contains the README explanation of accessing Sentinial-1 Radar imagery for free using Amazon Web Services (AWS), calculating zonal using R, and a quick start guide for using Tableau to display excel data. The README will walk a user through data download, data preparation, zonal statistics using R, and loading excel files into Tableau for graphic display. A Command Line Interface (CLI) script for browsing AWS buckets, two examples .tiff files, R script, study area .shp file, and excel workbook are contained in this [google drive](https://drive.google.com/drive/folders/1eB11vdeKu7GY5kuYM66aIo1W-ajp_c0q?usp=sharing). 
 
 ## What is Sentinel- 1 imagery, and why is it important?
 [<img width="701" alt="Screen Shot 2021-05-28 at 3 20 07 PM" src="https://user-images.githubusercontent.com/73979215/120032509-4b24cf00-bfc8-11eb-868c-9bf9fbbb6a6b.png">](https://www.esa.int/Enabling_Support/Operations/Sentinel-1_operations)
@@ -37,7 +37,8 @@ I have selected a friend’s cornfield in New Mexico, drawn a polygon in ArcGIS 
 I most often interact with tables for graphic display in excel, but we will simply use the provided excel spreadsheet as a launching point into Tableau. 
 
 ## Getting Started
-The first thing is first, let's set up our data folder. Start by downloading the harvest_detection_data folder contained in this repository. This folder includes: 
+The first thing is first, let's set up our data folder. Start by downloading the harvest_detection_data folder contained in this [google drive](https://drive.google.com/drive/folders/1eB11vdeKu7GY5kuYM66aIo1W-ajp_c0q?usp=sharing). This folder includes:
+
 •	Two .tiff images.    
 •	One R script.  
 •	A shapefile and associated metafiles.   
